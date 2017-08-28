@@ -26,7 +26,14 @@ while stack:
     if node.side:
         stack.append(node.side)
 
+left_handed_tree_longest_trunk_from_root = 0
+node = nodes[1]
+while node:
+    left_handed_tree_longest_trunk_from_root += 1
+    node = node.center
+
 M = int(input())
+nodes = [None] * (M + 1)
 for i in range(1, M + 1):
     nodes[i] = Node()
 for _ in range(M):
@@ -46,4 +53,13 @@ while stack:
     if node.side:
         stack.append(node.side)
 
-print(N + M - min(left_handed_tree_longest_trunk, right_handed_tree_longest_trunk))
+right_handed_tree_longest_trunk_from_root = 0
+node = nodes[1]
+while node:
+    right_handed_tree_longest_trunk_from_root += 1
+    node = node.center
+
+print(N + M - max(
+    min(left_handed_tree_longest_trunk_from_root, right_handed_tree_longest_trunk),
+    min(left_handed_tree_longest_trunk, right_handed_tree_longest_trunk_from_root)
+))
